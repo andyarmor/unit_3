@@ -1,7 +1,7 @@
 '''
 ############
 Lab 3.02
-############
+    ############
 Lab Exercise 1
 --------------
 Create a function, birthday_song, that prints out the happy birthday song to whatever name is input as an argument. The contract should be:
@@ -30,4 +30,10 @@ What is different about passing in a list as an argument?
 Read about list aliasing in section 3.4 of the associated reading, and write down what is happening in this case.
 Remember, the associated reading is in the "SWBAT" section on moodle!
 '''
-def
+import random
+
+#def five_cards():
+    #card_options = random.choice(['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'])
+    #print(card_options)
+
+
