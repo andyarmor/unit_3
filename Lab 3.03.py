@@ -209,8 +209,7 @@ built in shuffle algorithm. Feel free to read the documentation, but we have pro
 will return to you a shuffled deck of cards.
 
 import random
-​
-# name: shuffled_deck
+​# name: shuffled_deck
 # purpose: will return a shuffled deck to the user
 # input:
 # returns: a list representing a shuffled deck
@@ -222,3 +221,62 @@ def shuffled_deck():
 Add on when finished with above:
 Instead of closing the program when the deck is empty, create a way for the user to play again.
 '''
+import random
+
+def shuffled_deck():
+    basic_deck = list(range(2, 15)) * 4
+    random.shuffle(basic_deck)
+    return basic_deck
+
+#full deck
+deck = shuffled_deck()
+
+#get player names
+player1_name = input("Player 1, What is your name?")
+player2_name = input("Player 2, what is your name?")
+
+player1_score =0
+player2_score =0
+
+#player decks of 26 cards each
+player1_deck = deck[0:26]
+player2_deck = deck[26:53]
+
+#player turns
+current_player_name = player1_name
+current_player_deck = player1_deck 
+
+
+#print(len(player1_deck))
+#print(len(player2_deck))
+
+# player draws
+player1_draw = player1_deck.pop(0)
+player2_draw = player2_deck.pop(0)
+
+print(f"Player 1 draws a: {player1_draw}")
+print(f"Player 2 draws a: {player2_draw}")
+
+def player_turn(player_name, player_deck):
+    drawn_card = player_deck.pop(0)
+    print(f"{player_name} draws a {drawn_card}")
+    if current_player_name == player1_name:
+        current_player_name = player2_name
+        current_player_deck = player2_deck
+    else:
+        current_player_name = player1_name
+        current_player_deck = player1_deck
+
+    return drawn_card
+    
+
+#game loop
+Running = True
+while Running:
+    print(f"{current_player_name}, now it's your turn.")
+
+    input()
+
+    player_turn(current_player_name, current_player_deck)
+
+    
