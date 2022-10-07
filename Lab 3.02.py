@@ -56,6 +56,6 @@ def random_card_picker():
     print("The cards picked in order are: " + card1 + card2 + card3 + card4 + card5)
 
     return
-
+    
 random_card_picker()
 
