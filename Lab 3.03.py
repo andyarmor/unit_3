@@ -230,29 +230,19 @@ def shuffled_deck():
 
 #full deck
 deck = shuffled_deck()
-
+points_available = 2
 #get player names
 player1_name = input("Player 1, What is your name?")
 player2_name = input("Player 2, what is your name?")
 
+#setting up
 player1_score =0
 player2_score =0
-
-#player decks of 26 cards each
 player1_deck = deck[0:26]
-player2_deck = deck[26:53]
-
-#player turns
+player2_deck = deck[26:53] 
 current_player_name = player1_name
 current_player_deck = player1_deck 
-
-# player draws
-player1_card = player1_deck.pop(0)
-player2_card = player2_deck.pop(0)
-
-print(f"Player 1 draws a: {player1_card}")
-print(f"Player 2 draws a: {player2_card}")
-
+Running = True
 def player_turn(player_name, player_deck):
     drawn_card = player_deck.pop(0)
     print(f"{player_name} draws a {drawn_card}")
@@ -260,39 +250,31 @@ def player_turn(player_name, player_deck):
     return drawn_card
     
 
-#game loop
-Running = True
-while len(player1_deck):
-    print()
-    print(f"{current_player_name}, now it's your turn.")
-
-    input('Press enter for next round')
-if player1_card > player2_card:
-    print("Player 1, you won this round!")
-    player1_score.append(player2_card)
-
-
-
-player1_draw = player_turn(player1_name,player1_deck)
-player2_draw = player_turn(player2_name, player2_deck)
 
 def compare_scores(player1_card, player2_card):
+    global points_available
     global player1_score, player2_score
-    if player1_draw > player2_draw:
-        print(f"{player1_name} wins this round!")
-        player1_deck.append(player2_card)
+    if player1_card > player2_card:
+        print(f"{player1_name} won this round!")
+        player1_score +=points_available
+        points_available =2
     elif player2_card > player1_card:
         print(f"{player2_name} won this round!")
-        player2_deck.append(player1_card)
+        player2_score += points_available
+        points_available =2
     else:
         print("WAR")
- 
-    if player1_score > player2_score:
-        print(f"{player1_name} won!")
-        break
-    elif player2_score > player2_score:
-        print(f"{player2_name} won!")
-        break
+        points_available+=2
+#game loop
+while len(player1_deck) > 0:
+    print()
+    player1_card = player_turn(player1_name,player1_deck)
+    player2_card = player_turn(player2_name, player2_deck)
+
+    compare_scores(player1_card,player2_card)
+
+    print(f"{player1_name}: {player1_score} and {player2_name}: {player2_score}")
+
+    input("press enter for next round")
 
 
-    
