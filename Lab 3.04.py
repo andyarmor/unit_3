@@ -36,7 +36,7 @@ Draw a stack diagram for the following:
      song_lyrics = "rain drops on roses,"
      combined_song = song_lyrics + my_favorite_things
      return combined_song
-​
+
  # input: a string
  # output: a string
  def my_function_2(item, item2):
@@ -126,37 +126,34 @@ prints the final value of my_num
 
 Confirm that the printed values match what you expected.
 '''
-# input: a list of ints
-# output: an int\
+#Problem 1
+# var_1 = 'cat'
+# var_2 = 'dog'
 
-#def update_list(a_list):
-    #a_list[3] = "yo"
-    #b = a_list[4]
-    #b = 100
-#my_list = [1, 2, 3, 4, 5]
-#update_list(my_list)
-#print(my_list)
+# def print_out_my_favorite(favorite_pet):
+#     global var_1
+#     global var_2
+#     if favorite_pet == var_1:
+#         print("My favorite pet is the cat.")
+#     if favorite_pet == var_2:
+#         print("My favorite pet is the dog.")
+#     var_2 = "cat"
 
-
-import random
-var_1 = "kittens"
-var_2 = "cookies"
-def my_function(my_favorite_things):
-    #make them global variables
-    global var_1 
-    global var_2
-    my_favorite_things = (f" {var_1} and {var_2}")
-    song_lyrics = "rain drops on roses,"
-    #had to define what fav things were
-    combined_song = song_lyrics + my_favorite_things
-    print(combined_song)
-    return combined_song
+# print_out_my_favorite(var_1)
+# print(var_2)
     
- # input: a string
- # output: a string
-def my_function_2(item, item2):
-     full_lyrics = item + "on " + item2
-     full_song = my_function(full_lyrics)
-     return full_song
-my_song = my_function_2(var_1, var_2)
 
+#Problem 2
+var_1 = 'cat'
+var_2 = 'dog'
+
+def print_out_my_favorite(favorite_pet):
+    var_1 = 'dog'
+    var_2 = 'cat'
+    if favorite_pet == var_1:
+        print("My favorite pet is the cat.")
+    if favorite_pet == var_2:
+        print("My favorite pet is the dog.")
+
+print_out_my_favorite(var_1)
+print(var_1 + " " + var_2)
