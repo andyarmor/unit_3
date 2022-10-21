@@ -89,13 +89,13 @@ Problem 3
 ---------
 var_1 = 'cat'
 var_2 = 'dog'
-​
+
 def print_out_my_favorite(favorite_pet):
     if favorite_pet == var_1:
         print("My favorite pet is the cat.")
     if favorite_pet == var_2:
         print("My favorite pet is the dog.")
-​
+
 print_out_my_favorite(var_1)
 print(var_2)
 
@@ -144,16 +144,57 @@ Confirm that the printed values match what you expected.
     
 
 #Problem 2
+# var_1 = 'cat'
+# var_2 = 'dog'
+
+# def print_out_my_favorite(favorite_pet):
+#     var_1 = 'dog'
+#     var_2 = 'cat'
+#     if favorite_pet == var_1:
+#         print("My favorite pet is the cat.")
+#     if favorite_pet == var_2:
+#         print("My favorite pet is the dog.")
+
+# print_out_my_favorite(var_1)
+# print(var_1 + " " + var_2)
+
+#problem 3
 var_1 = 'cat'
 var_2 = 'dog'
 
 def print_out_my_favorite(favorite_pet):
-    var_1 = 'dog'
-    var_2 = 'cat'
+    favorite_pet = input("cat or dog? ")
     if favorite_pet == var_1:
         print("My favorite pet is the cat.")
+        print(favorite_pet)
     if favorite_pet == var_2:
         print("My favorite pet is the dog.")
+        print(favorite_pet)
+    return (favorite_pet)
 
-print_out_my_favorite(var_1)
-print(var_1 + " " + var_2)
+# global my_num
+# def add2():
+
+#     global my_num
+#     my_num = my_num + 2
+#     return
+
+
+# def multiply_num(multiplier):
+#     global my_num
+#     my_num = my_num * multiplier
+#     return
+
+# def add2_multiply(multiplier):
+
+#     global my_num 
+#     add2()
+#     multiply_num(multiplier)
+
+#     return
+
+# if __name__ == '__main__':
+#     my_num = 1
+
+#     add2_multiply(2)
+#     print(my_num)
