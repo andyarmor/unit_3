@@ -172,12 +172,12 @@ Confirm that the printed values match what you expected.
 #     return
 
 global my_num
+
 def add2():
 
     global my_num
-    my_num = my_num + 2
+    my_num = my_num +2
     return
-
 
 def multiply_num(multiplier):
 
@@ -193,8 +193,6 @@ def add2_multiply(multiplier):
 
     return
 
-if __name__ == '__main__':
-    my_num = 1
-
-    add2_multiply(2)
-    print(my_num)
+my_num = 3
+add2_multiply(7)
+print(my_num)
