@@ -30,6 +30,8 @@ def add_day():
     global day
     global month
     global year
+    global health
+    food -=5
     if day >=28 and month in months_28_days:
         day = 1
         month +=1
@@ -39,11 +41,15 @@ def add_day():
         month +=1
     elif day>=31 and month in months_31_days:
         day = 1
-        months +=1
+        month +=1
     if month > 12:
         month =1
         day =1
         year =1
+    return
+def lose_health():
+    global chance_of_health
+    chance_of_health = random.randint(1,5)
 def welcome_text():
     global p_name
     p_name = input("What is your name?")
@@ -56,13 +62,20 @@ def welcome_text():
     return
 welcome_text()
 
+def random_event():
+    global chance_of_event
+    chance_of_event = random.randint(1,5)
+    print(chance_of_event)
+    return
+random_event()
 #travel
 def travel():
     global miles_traveled
+    global day
     random_miles_traveled = random.randint(min_miles_every_travel, max_miles_every_travel)
     miles_traveled += random_miles_traveled
     milesremaining = total_miles - miles_traveled
-    print(f"You've traveled for {random_miles_traveled} for a total of {miles_traveled} total miles traveled")
+    print(f"You've traveled for {random_miles_traveled} miles for a total of {miles_traveled} miles traveled")
     print(f"You have {milesremaining} miles left until Oregon")
     random_days_traveled = random.randint(min_days_every_travel, max_days_every_travel)
     for day in range(random_days_traveled):
@@ -72,6 +85,7 @@ def travel():
 #rest
 def rest():
     global health
+    global day
     if health < 5:
         health+=1
         randomdaysresting = random.randint(min_days_every_rest, max_days_every_rest)
@@ -85,6 +99,7 @@ def rest():
 #hunt
 def hunt():
     global food
+    global day
     food+=100
     randomDaysHunting = random.randint(min_days_every_hunt, max_days_every_hunt)
     print(f"You took {randomDaysHunting} days to gather 100 pounds of food!")
@@ -93,17 +108,14 @@ def hunt():
     return
 
 def status():
-    sex =1
+    global health
+    global food
+    global day
+    print(f"Health: {health} Food: {food} Day: {day}")
     return
 def help():
     print("Reminder the question is:  What would you like to do? (travel, rest, hunt, status, help or quit)")
     return
-def quit():
-    global Playing
-    space()
-    print("Sorry to see you go! Come back soon!")
-    Playing = False
-
 #game loop
 while playing:
     space()
@@ -112,7 +124,9 @@ while playing:
         space()
         rest()
     elif p_answer == 'quit':
-        quit()
+        space()
+        print("Sorry to see you go!")
+        playing = False
     elif p_answer == 'hunt':
         space()
         hunt()
