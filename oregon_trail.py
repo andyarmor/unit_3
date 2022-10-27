@@ -1,4 +1,123 @@
 import random
+
+#functions
+def space():
+    print("")
+
+
+def add_day():
+    global day
+    global month
+    global year
+
+    day+=1
+
+    if day >=28 and month in months_28_days:
+        day = 1
+        month +=1
+    elif day>=30 and month in months_30_days:
+
+        day = 1
+        month +=1
+    elif day>=31 and month in months_31_days:
+        day = 1
+        month +=1
+    if month > 12:
+        global playing
+        month =1
+        day =1
+        year =1
+        print("You did not make it in time!")
+        playing = False
+    
+
+def lose_health():
+    global chance_of_losing_health
+    chance_of_losing_health = random.randint(1,5)
+
+def welcome_text():
+    global p_name
+    p_name = input("What is your name?")
+    space()
+    print(f"Hello {p_name}, and welcome to the Oregon Trail!")
+    print("You're starting in Independance, Missouri.")
+    print("It is March 1st and you need to travel 2000 miles to Oregon by December 31st!")
+    print("You have 500lbs of food and your health is 5 so you will need to hunt and rest. Good Luck!")
+    space()
+    
+
+
+def random_event():
+    global chance_of_event
+    chance_of_event = random.randint(1,50)
+    if 1<= chance_of_event <= 5:
+        print("")
+    
+    
+
+#travel
+def travel():
+    global miles_traveled
+    random_miles_traveled = random.randint(min_miles_every_travel, max_miles_every_travel)
+    miles_traveled += random_miles_traveled
+    milesremaining = total_miles - miles_traveled
+    print(f"You've traveled for {random_miles_traveled} miles for a total of {miles_traveled} miles traveled")
+    print(f"You have {milesremaining} miles left until Oregon")
+    random_days_traveled = random.randint(min_days_every_travel, max_days_every_travel)
+    random_miles_traveled = random.randint(min_miles_every_travel, max_miles_every_travel)
+    for day in range(random_days_traveled):
+        add_day()
+    
+
+#rest
+def rest():
+    global health
+
+    if health < 5:
+        health+=1
+        randomdaysresting = random.randint(min_days_every_rest, max_days_every_rest)
+        for day in range(randomdaysresting):
+            add_day()
+        print(f"You rested for {randomdaysresting} and your health is {health}")
+    else:
+        print("You're fully healed!")
+    
+
+#hunt
+def hunt():
+    global food
+    food+=100
+    randomDaysHunting = random.randint(min_days_every_hunt, max_days_every_hunt)
+    print(f"You took {randomDaysHunting} days to gather 100 pounds of food!")
+    for day in range(randomDaysHunting):
+        add_day()
+    
+def check_status():
+    global month
+    global day
+    global total_miles
+    print(f"Health: {health} Food: {food} pounds Day: {day} Month: {month}")
+    
+
+def check_status():
+    global health
+    global food
+    global year
+    if year>=1:
+        handle_loss()
+    elif health <1:
+        handle_loss()
+    elif food <1 :
+        handle_loss()
+def handle_loss():
+    check_status()
+    handle_quit()
+def handle_quit():
+    global status
+def help():
+    print("Reminder the question is:  What would you like to do? (travel, rest, hunt, status, help or quit)")
+    
+
 #variables and basics
 months_31_days = [1,3,5,7,8,10,12]
 months_30_days = [4,6,9,11]
@@ -20,102 +139,9 @@ miles_traveled = 0
 total_miles =2000
 playing = True
 
-#functions
-def space():
-    print("")
-    return
-
-def add_day():
-    global food
-    global day
-    global month
-    global year
-    global health
-    food -=5
-    if day >=28 and month in months_28_days:
-        day = 1
-        month +=1
-    elif day>=30 and month in months_30_days:
-
-        day = 1
-        month +=1
-    elif day>=31 and month in months_31_days:
-        day = 1
-        month +=1
-    if month > 12:
-        month =1
-        day =1
-        year =1
-    return
-def lose_health():
-    global chance_of_health
-    chance_of_health = random.randint(1,5)
-def welcome_text():
-    global p_name
-    p_name = input("What is your name?")
-    space()
-    print(f"Hello {p_name}, and welcome to the Oregon Trail!")
-    print("You're starting in Independance, Missouri.")
-    print("It is March 1st and you need to travel 2000 miles to Oregon by December 31st!")
-    print("You have 500lbs of food and your health is 5 so you will need to hunt and rest. Good Luck!")
-    space()
-    return
 welcome_text()
 
-def random_event():
-    global chance_of_event
-    chance_of_event = random.randint(1,5)
-    print(chance_of_event)
-    return
-random_event()
-#travel
-def travel():
-    global miles_traveled
-    global day
-    random_miles_traveled = random.randint(min_miles_every_travel, max_miles_every_travel)
-    miles_traveled += random_miles_traveled
-    milesremaining = total_miles - miles_traveled
-    print(f"You've traveled for {random_miles_traveled} miles for a total of {miles_traveled} miles traveled")
-    print(f"You have {milesremaining} miles left until Oregon")
-    random_days_traveled = random.randint(min_days_every_travel, max_days_every_travel)
-    for day in range(random_days_traveled):
-        add_day()
-    return
 
-#rest
-def rest():
-    global health
-    global day
-    if health < 5:
-        health+=1
-        randomdaysresting = random.randint(min_days_every_rest, max_days_every_rest)
-        for day in range(randomdaysresting):
-            add_day()
-        print(f"You rested for {randomdaysresting} and your health is {health}")
-    else:
-        print("You're fully healed!")
-    return
-
-#hunt
-def hunt():
-    global food
-    global day
-    food+=100
-    randomDaysHunting = random.randint(min_days_every_hunt, max_days_every_hunt)
-    print(f"You took {randomDaysHunting} days to gather 100 pounds of food!")
-    for day in range(randomDaysHunting):
-        add_day()
-    return
-
-def status():
-    global health
-    global food
-    global day
-    print(f"Health: {health} Food: {food} Day: {day}")
-    return
-def help():
-    print("Reminder the question is:  What would you like to do? (travel, rest, hunt, status, help or quit)")
-    return
 #game loop
 while playing:
     space()
@@ -132,7 +158,7 @@ while playing:
         hunt()
     elif p_answer == 'status':
         space()
-        status()
+        check_status()
     elif p_answer == 'travel':
         space()
         travel()
@@ -142,6 +168,9 @@ while playing:
     else:
         space()
         print("This is not one of the commands!")
+    if health ==0:
+        print("WASTED!")
+        playing=False
 
 
 
