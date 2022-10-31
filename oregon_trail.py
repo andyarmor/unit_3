@@ -6,22 +6,29 @@ def space():
 
 
 def add_day():
+    global food
+    food-=5
+
     global day
     global month
     global year
 
     day+=1
 
+    global health
+    if day == 11 or day == 24:
+        health-=1
+
     if day >=28 and month in months_28_days:
         day = 1
         month +=1
     elif day>=30 and month in months_30_days:
-
         day = 1
         month +=1
     elif day>=31 and month in months_31_days:
         day = 1
         month +=1
+
     if month > 12:
         global playing
         month =1
@@ -29,11 +36,6 @@ def add_day():
         year =1
         print("You did not make it in time!")
         playing = False
-    
-
-def lose_health():
-    global chance_of_losing_health
-    chance_of_losing_health = random.randint(1,5)
 
 def welcome_text():
     global p_name
@@ -48,27 +50,29 @@ def welcome_text():
 
 
 def random_event():
-    global chance_of_event
-    chance_of_event = random.randint(1,50)
-    if 1<= chance_of_event <= 5:
-        print("")
+    chance_of_food = random.randint(min_food, max_food)
+    chance_of_days = random.randint(min_river_days, max_river_days)
+    chance_of_health = random.randint(min_health, max_health)
+    print(f"There has been a river crossing! This has taken up {chance_of_days} days, {chance_of_food} of your food stach, and {chance_of_health} health bar")
     
     
 
 #travel
 def travel():
+    global playing
     global miles_traveled
+
     random_miles_traveled = random.randint(min_miles_every_travel, max_miles_every_travel)
+
     miles_traveled += random_miles_traveled
     milesremaining = total_miles - miles_traveled
-    print(f"You've traveled for {random_miles_traveled} miles for a total of {miles_traveled} miles traveled")
-    print(f"You have {milesremaining} miles left until Oregon")
     random_days_traveled = random.randint(min_days_every_travel, max_days_every_travel)
-    random_miles_traveled = random.randint(min_miles_every_travel, max_miles_every_travel)
+
+    print(f"You've traveled {random_days_traveled} days for {random_miles_traveled} miles for a total of {miles_traveled} miles traveled")
+    print(f"You have {milesremaining} miles left until Oregon")
+
     for day in range(random_days_traveled):
         add_day()
-    
-
 #rest
 def rest():
     global health
@@ -78,7 +82,7 @@ def rest():
         randomdaysresting = random.randint(min_days_every_rest, max_days_every_rest)
         for day in range(randomdaysresting):
             add_day()
-        print(f"You rested for {randomdaysresting} and your health is {health}")
+        print(f"You rested for {randomdaysresting} days and your health is {health}")
     else:
         print("You're fully healed!")
     
@@ -95,25 +99,10 @@ def hunt():
 def check_status():
     global month
     global day
-    global total_miles
-    print(f"Health: {health} Food: {food} pounds Day: {day} Month: {month}")
-    
-
-def check_status():
     global health
     global food
-    global year
-    if year>=1:
-        handle_loss()
-    elif health <1:
-        handle_loss()
-    elif food <1 :
-        handle_loss()
-def handle_loss():
-    check_status()
-    handle_quit()
-def handle_quit():
-    global status
+    print(f"Health: {health}  Food: {food} pounds  Month: {month}  Day: {day}")
+
 def help():
     print("Reminder the question is:  What would you like to do? (travel, rest, hunt, status, help or quit)")
     
@@ -130,6 +119,12 @@ min_days_every_rest = 2
 max_days_every_rest = 5
 min_days_every_hunt = 2
 max_days_every_hunt = 5
+min_food = 1
+max_food =10
+min_river_days = 1
+max_river_days = 10
+min_health = 0
+max_health = 1
 day=1
 month=3
 year=0
@@ -146,6 +141,9 @@ welcome_text()
 while playing:
     space()
     p_answer = input("What would you like to do? (travel, rest, hunt, status, help or quit)")
+    #if day == 17 or 5:
+        #space()
+        #random_event()
     if p_answer == 'rest':
         space()
         rest()
@@ -169,7 +167,7 @@ while playing:
         space()
         print("This is not one of the commands!")
     if health ==0:
-        print("WASTED!")
+        print("You died, remember to rest next time...")
         playing=False
 
 
