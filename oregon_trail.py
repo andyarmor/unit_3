@@ -47,16 +47,6 @@ def welcome_text():
     print("You have 500lbs of food and your health is 5 so you will need to hunt and rest. Good Luck!")
     space()
     
-
-
-def random_event():
-    chance_of_food = random.randint(min_food, max_food)
-    chance_of_days = random.randint(min_river_days, max_river_days)
-    chance_of_health = random.randint(min_health, max_health)
-    print(f"There has been a river crossing! This has taken up {chance_of_days} days, {chance_of_food} of your food stach, and {chance_of_health} health bar")
-    
-    
-
 #travel
 def travel():
     global playing
@@ -141,9 +131,6 @@ welcome_text()
 while playing:
     space()
     p_answer = input("What would you like to do? (travel, rest, hunt, status, help or quit)")
-    #if day == 17 or 5:
-        #space()
-        #random_event()
     if p_answer == 'rest':
         space()
         rest()
